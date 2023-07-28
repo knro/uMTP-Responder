@@ -1,21 +1,14 @@
 [Unit]
-Description=Transfer files through the USB port via MTP
-Documentation=https://github.com/viveris/uMTP-Responder
-Documentation=/usr/share/doc/umtp-responder/README.Debian
+Description=uMTP-Responder daemon
+After=network.target
 ConditionPathExists=/etc/umtprd/umtprd.conf
 
 [Service]
 Type=simple
-<<<<<<< HEAD
 ExecStartPre=/usr/bin/umtprd-gfs
 ExecStart=/usr/bin/umtprd
-#ExecStartPost=/usr/bin/sh -c 'ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/g1/UDC'
-
-[Install]
-WantedBy=usb-gadget.target
-=======
-ExecStart=/usr/sbin/umtprd-ffs
+Restart=on-failure
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
->>>>>>> a60390b (Use CMake and add debian directory)
