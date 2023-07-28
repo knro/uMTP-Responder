@@ -18,7 +18,7 @@ target_link_libraries(umtprd ${CMAKE_THREAD_LIBS_INIT})
 install(TARGETS umtprd RUNTIME DESTINATION bin )
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd.conf DESTINATION etc/umtprd)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd-ffs.sh DESTINATION sbin)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd-ffs DESTINATION sbin/)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/umtp-responder.service DESTINATION /lib/systemd/system)
 
 
