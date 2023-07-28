@@ -6,9 +6,16 @@ ConditionPathExists=/etc/umtprd/umtprd.conf
 
 [Service]
 Type=simple
+<<<<<<< HEAD
 ExecStartPre=/usr/bin/umtprd-gfs
 ExecStart=/usr/bin/umtprd
 #ExecStartPost=/usr/bin/sh -c 'ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/g1/UDC'
 
 [Install]
 WantedBy=usb-gadget.target
+=======
+ExecStart=/usr/sbin/umtprd-ffs
+
+[Install]
+WantedBy=multi-user.target
+>>>>>>> a60390b (Use CMake and add debian directory)

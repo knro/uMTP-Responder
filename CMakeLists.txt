@@ -17,9 +17,14 @@ target_link_libraries(umtprd ${CMAKE_THREAD_LIBS_INIT})
 
 install(TARGETS umtprd RUNTIME DESTINATION bin )
 
+<<<<<<< HEAD
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd.conf DESTINATION /etc/umtprd)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd-ffs DESTINATION /usr/bin)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd-gfs DESTINATION /usr/bin)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/umtp-responder.service DESTINATION /lib/systemd/system)
+=======
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd.conf DESTINATION etc/umtprd)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd-ffs.sh DESTINATION sbin)
+>>>>>>> a60390b (Use CMake and add debian directory)
 
 
