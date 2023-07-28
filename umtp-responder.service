@@ -6,7 +6,9 @@ ConditionPathExists=/etc/umtprd/umtprd.conf
 
 [Service]
 Type=simple
-ExecStart=/usr/sbin/umtprd-ffs
+ExecStartPre=/usr/sbin/umtprd-ffs
+ExecStart=/usr/bin/umtprd
+ExecStartPost=/usr/bin/sh -c 'ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/g1/UDC'
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=usb-gadget.target

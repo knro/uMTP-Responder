@@ -1,47 +1,36 @@
 #!/bin/sh
 
-# FunctionFS uMTPrd startup example/test script
-# Must be launched from a writable/temporary folder.
-
+# StellarMate Pro MTP Startup Script
 modprobe libcomposite
 
-mkdir cfg
-mount none cfg -t configfs
+root=/sys/kernel/config
+gadget=$root/usb_gadget/g1
+strings=$gadget/strings/0x409
+configs=$gadget/configs/c.1
+functions=$gadget/functions/ffs.mtp
 
-mkdir cfg/usb_gadget/g1
-cd cfg/usb_gadget/g1
+mkdir -p $strings
+mkdir -p $configs/strings/0x409
+mkdir -p $functions
 
-mkdir configs/c.1
+echo 0x0100 > $gadget/idProduct
+echo 0x1D6B > $gadget/idVendor
 
-mkdir functions/ffs.mtp
-# Uncomment / Change the follow line to enable another usb gadget function
-#mkdir functions/acm.usb0
+echo "01234567" > $strings/serialnumber
+echo "Ikarus Technologies" > $strings/manufacturer
+echo "StellarMate Pro" > $strings/product
 
-mkdir strings/0x409
-mkdir configs/c.1/strings/0x409
+echo "Conf 1" > $configs/strings/0x409/configuration
+echo 120 > $configs/MaxPower
 
-echo 0x0100 > idProduct
-echo 0x1D6B > idVendor
+if [ ! -e "$configs/ffs.mtp" ]
+then
+   ln -s $functions $configs
+fi
 
-echo "01234567" > strings/0x409/serialnumber
-echo "Ikarus Technologies" > strings/0x409/manufacturer
-echo "StellarMate Pro" > strings/0x409/product
+if [ ! -e "/dev/ffs-mtp" ];
+then
+   mkdir /dev/ffs-mtp
+   mount -t functionfs mtp /dev/ffs-mtp
+fi
 
-echo "Conf 1" > configs/c.1/strings/0x409/configuration
-echo 120 > configs/c.1/MaxPower
-
-ln -s functions/ffs.mtp configs/c.1
-# Uncomment / Change the follow line to enable another usb gadget function
-#ln -s functions/acm.usb0 configs/c.1
-
-mkdir /dev/ffs-mtp
-mount -t functionfs mtp /dev/ffs-mtp
-# Start the umtprd service
-umtprd &
-
-cd ../../..
-
-sleep 1
-
-# enable the usb functions
-ls /sys/class/udc/ > cfg/usb_gadget/g1/UDC
