@@ -24,8 +24,8 @@ echo 0x0100 > idProduct
 echo 0x1D6B > idVendor
 
 echo "01234567" > strings/0x409/serialnumber
-echo "Viveris Technologies" > strings/0x409/manufacturer
-echo "The Viveris Product !" > strings/0x409/product
+echo "Ikarus Technologies" > strings/0x409/manufacturer
+echo "StellarMate Pro" > strings/0x409/product
 
 echo "Conf 1" > configs/c.1/strings/0x409/configuration
 echo 120 > configs/c.1/MaxPower

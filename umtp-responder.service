@@ -1,0 +1,12 @@
+[Unit]
+Description=Transfer files through the USB port via MTP
+Documentation=https://github.com/viveris/uMTP-Responder
+Documentation=/usr/share/doc/umtp-responder/README.Debian
+ConditionPathExists=/etc/umtprd/umtprd.conf
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/umtprd-ffs
+
+[Install]
+WantedBy=multi-user.target
