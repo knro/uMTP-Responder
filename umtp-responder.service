@@ -6,7 +6,7 @@ ConditionPathExists=/etc/umtprd/umtprd.conf
 
 [Service]
 Type=simple
-ExecStartPre=/usr/sbin/umtprd-gfs
+ExecStartPre=/usr/bin/umtprd-gfs
 ExecStart=/usr/bin/umtprd
 #ExecStartPost=/usr/bin/sh -c 'ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/g1/UDC'
 
