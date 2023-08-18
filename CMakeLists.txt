@@ -19,6 +19,7 @@ install(TARGETS umtprd RUNTIME DESTINATION bin )
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd.conf DESTINATION etc/umtprd)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd-ffs DESTINATION sbin/)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/conf/umtprd-gfs DESTINATION sbin/)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/umtp-responder.service DESTINATION /lib/systemd/system)
 
 

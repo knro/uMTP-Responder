@@ -11,8 +11,3 @@ modprobe gadgetfs
 
 mkdir /dev/gadget
 mount -t gadgetfs gadgetfs /dev/gadget
-
-# Start umtprd
-while [ test ]; do
-  /usr/bin/umtprd
-done
