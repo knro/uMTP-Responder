@@ -1,9 +1,9 @@
 #!/usr/bin/make -f
-export DH_VERBOSE=1
 
-%:
-	dh $@
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/cmake.mk
+
+DEB_DH_SHLIBDEPS_ARGS=-u--ignore-missing-info
 
 override_dh_installsystemd:
 	dh_installsystemd --no-stop-on-upgrade
-
