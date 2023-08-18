@@ -5,10 +5,16 @@ ConditionPathExists=/etc/umtprd/umtprd.conf
 
 [Service]
 Type=simple
+<<<<<<< HEAD
 ExecStartPre=/usr/bin/umtprd-gfs
 ExecStart=/usr/bin/umtprd
 Restart=on-failure
 RestartSec=10
+=======
+ExecStartPre=/usr/sbin/umtprd-gfs
+ExecStart=/usr/bin/umtprd
+#ExecStartPost=/usr/bin/sh -c 'ls /sys/class/udc/ > /sys/kernel/config/usb_gadget/g1/UDC'
+>>>>>>> dede0a6 (use gadgetfs by default)
 
 [Install]
 WantedBy=multi-user.target
