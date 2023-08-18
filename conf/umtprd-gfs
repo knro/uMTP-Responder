@@ -9,5 +9,5 @@ modprobe gadgetfs
 
 # Mount gadgetfs
 
-mkdir /dev/gadget
-mount -t gadgetfs gadgetfs /dev/gadget
+mkdir /dev/gadget || true
+mount -t gadgetfs gadgetfs /dev/gadget || true
