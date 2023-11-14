@@ -133,8 +133,8 @@ int fs_entry_stat(char *path, filefoundinfo* fileinfo)
 			i--;
 		}
 
-		fileinfo->filename[FS_HANDLE_MAX_FILENAME_SIZE] = '\0';
 		strncpy(fileinfo->filename,&path[i],FS_HANDLE_MAX_FILENAME_SIZE);
+		fileinfo->filename[FS_HANDLE_MAX_FILENAME_SIZE] = '\0';
 
 		return 1;
 	}
@@ -276,11 +276,14 @@ fs_entry * search_entry(fs_handles_db * db, filefoundinfo *fileinfo, uint32_t pa
 {
 	fs_entry * entry_list;
 
+	if( !db )
+		return NULL;
+
 	entry_list = db->entry_list;
 
 	while( entry_list )
 	{
-		if( !( entry_list->flags & ENTRY_IS_DELETED ) && ( entry_list->parent == parent ) && ( entry_list->storage_id == storage_id ) )
+		if( !( entry_list->flags & ENTRY_IS_DELETED ) && ( entry_list->parent == parent ) && ( entry_list->storage_id == storage_id ) && entry_list->name )
 		{
 			if( !strcmp(entry_list->name,fileinfo->filename) )
 			{
@@ -334,6 +337,9 @@ fs_entry * alloc_entry(fs_handles_db * db, filefoundinfo *fileinfo, uint32_t par
 fs_entry * alloc_root_entry(fs_handles_db * db, uint32_t storage_id)
 {
 	fs_entry * entry;
+
+	if( !db )
+		return NULL;
 
 	entry = malloc(sizeof(fs_entry));
 	if( entry )
@@ -537,11 +543,16 @@ char * build_full_path(fs_handles_db * db,char * root_path,fs_entry * entry)
 
 	full_path = NULL;
 
+	if( !entry )
+		return full_path;
+
 	curentry = entry;
 	totallen = 0;
 	do
 	{
-		totallen += strlen(curentry->name);
+		if(curentry->name)
+			totallen += strlen(curentry->name);
+
 		totallen++; // '/'
 
 		if( curentry->parent && ( curentry->parent != 0xFFFFFFFF ) )
@@ -569,11 +580,15 @@ char * build_full_path(fs_handles_db * db,char * root_path,fs_entry * entry)
 
 		do
 		{
-			namelen = strlen(curentry->name);
+			if(curentry->name)
+				namelen = strlen(curentry->name);
+			else
+				namelen = 0;
 
 			full_path_offset -= namelen;
 
-			memcpy(&full_path[full_path_offset],curentry->name,namelen);
+			if( namelen )
+				memcpy(&full_path[full_path_offset],curentry->name,namelen);
 
 			full_path_offset--;
 
@@ -594,7 +609,8 @@ char * build_full_path(fs_handles_db * db,char * root_path,fs_entry * entry)
 			memcpy(&full_path[0],root_path,strlen(root_path));
 		}
 
-		PRINT_DEBUG("build_full_path : %s -> %s",entry->name, full_path);
+		if(entry->name)
+			PRINT_DEBUG("build_full_path : %s -> %s",entry->name, full_path);
 	}
 
 	return full_path;

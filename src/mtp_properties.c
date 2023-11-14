@@ -37,6 +37,7 @@
 #include "mtp_helpers.h"
 #include "mtp_constant.h"
 #include "mtp_constant_strings.h"
+#include "mtp_datasets.h"
 #include "mtp_properties.h"
 
 #include "fs_handles_db.h"
@@ -44,7 +45,7 @@
 
 #include "logs_out.h"
 
-formats_property fmt_properties[]=
+const formats_property fmt_properties[]=
 {   // prop_code                       data_type         getset    default value          group code
 	{ MTP_FORMAT_UNDEFINED    , (uint16_t[]){   MTP_PROPERTY_STORAGE_ID, MTP_PROPERTY_OBJECT_FORMAT, MTP_PROPERTY_PROTECTION_STATUS, MTP_PROPERTY_OBJECT_SIZE,
 												MTP_PROPERTY_OBJECT_FILE_NAME, MTP_PROPERTY_DATE_MODIFIED, MTP_PROPERTY_PARENT_OBJECT, MTP_PROPERTY_PERSISTENT_UID,
@@ -211,36 +212,36 @@ formats_property fmt_properties[]=
 
 };
 
-profile_property properties[]=
-{   // prop_code                       data_type         getset    default value          group code           format id
-	{MTP_PROPERTY_STORAGE_ID,          MTP_TYPE_UINT32,    0x00,   0x00000000           , 0x000000001 , 0x00 , 0xFFFF },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_UNDEFINED  , 0x000000000 , 0x00 , MTP_FORMAT_UNDEFINED },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_ASSOCIATION, 0x000000000 , 0x00 , MTP_FORMAT_ASSOCIATION },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_TEXT       , 0x000000000 , 0x00 , MTP_FORMAT_TEXT },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_HTML       , 0x000000000 , 0x00 , MTP_FORMAT_HTML },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_WAV        , 0x000000000 , 0x00 , MTP_FORMAT_WAV },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MP3        , 0x000000000 , 0x00 , MTP_FORMAT_MP3 },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MPEG       , 0x000000000 , 0x00 , MTP_FORMAT_MPEG },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_EXIF_JPEG  , 0x000000000 , 0x00 , MTP_FORMAT_EXIF_JPEG },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_BMP        , 0x000000000 , 0x00 , MTP_FORMAT_BMP },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_AIFF       , 0x000000000 , 0x00 , MTP_FORMAT_AIFF },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MPEG       , 0x000000000 , 0x00 , MTP_FORMAT_MPEG },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_WMA        , 0x000000000 , 0x00 , MTP_FORMAT_WMA },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_OGG        , 0x000000000 , 0x00 , MTP_FORMAT_OGG },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_AAC        , 0x000000000 , 0x00 , MTP_FORMAT_AAC },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MP4_CONTAINER                 , 0x000000000 , 0x00 , MTP_FORMAT_MP4_CONTAINER },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_3GP_CONTAINER                 , 0x000000000 , 0x00 , MTP_FORMAT_3GP_CONTAINER },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_ABSTRACT_AV_PLAYLIST          , 0x000000000 , 0x00 , MTP_FORMAT_ABSTRACT_AV_PLAYLIST },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_WPL_PLAYLIST                  , 0x000000000 , 0x00 , MTP_FORMAT_WPL_PLAYLIST },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_M3U_PLAYLIST                  , 0x000000000 , 0x00 , MTP_FORMAT_M3U_PLAYLIST },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_PLS_PLAYLIST                  , 0x000000000 , 0x00 , MTP_FORMAT_PLS_PLAYLIST },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_XML_DOCUMENT                  , 0x000000000 , 0x00 , MTP_FORMAT_XML_DOCUMENT },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_FLAC                          , 0x000000000 , 0x00 , MTP_FORMAT_FLAC },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_AVI                           , 0x000000000 , 0x00 , MTP_FORMAT_AVI },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_ASF                           , 0x000000000 , 0x00 , MTP_FORMAT_ASF },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MS_WORD_DOCUMENT              , 0x000000000 , 0x00 , MTP_FORMAT_MS_WORD_DOCUMENT },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MS_EXCEL_SPREADSHEET          , 0x000000000 , 0x00 , MTP_FORMAT_MS_EXCEL_SPREADSHEET },
-	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MS_POWERPOINT_PRESENTATION    , 0x000000000 , 0x00 , MTP_FORMAT_MS_POWERPOINT_PRESENTATION },
+const profile_property properties[]=
+{   // prop_code                       data_type         getset    default value                            group code  form_flag format id
+	{MTP_PROPERTY_STORAGE_ID,          MTP_TYPE_UINT32,    0x00,   0x00000000                             , 0x000000001 , 0x00 , 0xFFFF },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_UNDEFINED                   , 0x000000000 , 0x00 , MTP_FORMAT_UNDEFINED },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_ASSOCIATION                 , 0x000000000 , 0x00 , MTP_FORMAT_ASSOCIATION },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_TEXT                        , 0x000000000 , 0x00 , MTP_FORMAT_TEXT },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_HTML                        , 0x000000000 , 0x00 , MTP_FORMAT_HTML },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_WAV                         , 0x000000000 , 0x00 , MTP_FORMAT_WAV },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MP3                         , 0x000000000 , 0x00 , MTP_FORMAT_MP3 },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MPEG                        , 0x000000000 , 0x00 , MTP_FORMAT_MPEG },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_EXIF_JPEG                   , 0x000000000 , 0x00 , MTP_FORMAT_EXIF_JPEG },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_BMP                         , 0x000000000 , 0x00 , MTP_FORMAT_BMP },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_AIFF                        , 0x000000000 , 0x00 , MTP_FORMAT_AIFF },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MPEG                        , 0x000000000 , 0x00 , MTP_FORMAT_MPEG },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_WMA                         , 0x000000000 , 0x00 , MTP_FORMAT_WMA },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_OGG                         , 0x000000000 , 0x00 , MTP_FORMAT_OGG },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_AAC                         , 0x000000000 , 0x00 , MTP_FORMAT_AAC },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MP4_CONTAINER               , 0x000000000 , 0x00 , MTP_FORMAT_MP4_CONTAINER },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_3GP_CONTAINER               , 0x000000000 , 0x00 , MTP_FORMAT_3GP_CONTAINER },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_ABSTRACT_AV_PLAYLIST        , 0x000000000 , 0x00 , MTP_FORMAT_ABSTRACT_AV_PLAYLIST },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_WPL_PLAYLIST                , 0x000000000 , 0x00 , MTP_FORMAT_WPL_PLAYLIST },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_M3U_PLAYLIST                , 0x000000000 , 0x00 , MTP_FORMAT_M3U_PLAYLIST },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_PLS_PLAYLIST                , 0x000000000 , 0x00 , MTP_FORMAT_PLS_PLAYLIST },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_XML_DOCUMENT                , 0x000000000 , 0x00 , MTP_FORMAT_XML_DOCUMENT },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_FLAC                        , 0x000000000 , 0x00 , MTP_FORMAT_FLAC },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_AVI                         , 0x000000000 , 0x00 , MTP_FORMAT_AVI },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_ASF                         , 0x000000000 , 0x00 , MTP_FORMAT_ASF },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MS_WORD_DOCUMENT            , 0x000000000 , 0x00 , MTP_FORMAT_MS_WORD_DOCUMENT },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MS_EXCEL_SPREADSHEET        , 0x000000000 , 0x00 , MTP_FORMAT_MS_EXCEL_SPREADSHEET },
+	{MTP_PROPERTY_OBJECT_FORMAT,       MTP_TYPE_UINT16,    0x00,   MTP_FORMAT_MS_POWERPOINT_PRESENTATION  , 0x000000000 , 0x00 , MTP_FORMAT_MS_POWERPOINT_PRESENTATION },
 
 	{MTP_PROPERTY_OBJECT_SIZE,         MTP_TYPE_UINT64,    0x00,   0x0000000000000000 , 0x000000000 , 0x00 , MTP_FORMAT_ASSOCIATION },
 	{MTP_PROPERTY_STORAGE_ID,          MTP_TYPE_UINT32,    0x00,   0x00000000         , 0x000000000 , 0x00 , MTP_FORMAT_ASSOCIATION },
@@ -272,7 +273,7 @@ profile_property properties[]=
 	{0xFFFF,                           MTP_TYPE_UINT32,    0x00,   0x00000000         , 0x000000000 , 0x00 }
 };
 
-profile_property dev_properties[]=
+const profile_property dev_properties[]=
 {   // prop_code                                           data_type         getset    default value          group code
 	//{MTP_DEVICE_PROPERTY_SYNCHRONIZATION_PARTNER,          MTP_TYPE_UINT32,    0x00,   0x00000000           , 0x000000000 , 0x00 },
 	//{MTP_DEVICE_PROPERTY_IMAGE_SIZE,                       MTP_TYPE_UINT32,    0x00,   0x00000000           , 0x000000000 , 0x00 },
@@ -737,8 +738,13 @@ int build_objectproplist_dataset(mtp_ctx * ctx, void * buffer, int maxsize,fs_en
 	int ofs,ret,numberofelements;
 	char * path;
 	char timestr[32];
-	uint32_t tmp_dword;
+	// tmp_dword : 2 dword to fix the static analysis error with the MTP_TYPE_UINT64 case.
+	// Probably a false positive alert
+	// but some codes was added to check possible second word corruption
+	uint32_t tmp_dword[2];
 	uint32_t tmp_dword_array[4];
+
+	tmp_dword[1] = 0xDEADBEEF;  // Canary
 
 	ret = -1;
 	path = build_full_path(ctx->fs_db, mtp_get_storage_root(ctx, entry->storage_id), entry);
@@ -765,35 +771,37 @@ int build_objectproplist_dataset(mtp_ctx * ctx, void * buffer, int maxsize,fs_en
 	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_STORAGE_ID, handle, &entry->storage_id,prop_code);
 
 	if(entry->flags & ENTRY_IS_DIR)
-		tmp_dword = MTP_FORMAT_ASSOCIATION;
+		tmp_dword[0] = MTP_FORMAT_ASSOCIATION;
 	else
-		tmp_dword = MTP_FORMAT_UNDEFINED;
+		tmp_dword[0] = MTP_FORMAT_UNDEFINED;
 
-	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_OBJECT_FORMAT, handle, &tmp_dword,prop_code);
+	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_OBJECT_FORMAT, handle, &tmp_dword[0],prop_code);
 
 	if(entry->flags & ENTRY_IS_DIR)
-		tmp_dword = MTP_ASSOCIATION_TYPE_GENERIC_FOLDER;
+		tmp_dword[0] = MTP_ASSOCIATION_TYPE_GENERIC_FOLDER;
 	else
-		tmp_dword = 0x0000;
+		tmp_dword[0] = 0x0000;
 
-	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_ASSOCIATION_TYPE, handle, &tmp_dword,prop_code);
+	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_ASSOCIATION_TYPE, handle, &tmp_dword[0],prop_code);
 	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_PARENT_OBJECT, handle, &entry->parent,prop_code);
 	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_OBJECT_SIZE, handle, &entry->size,prop_code);
 
-	tmp_dword = 0x0000;
-	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_PROTECTION_STATUS, handle, &tmp_dword,prop_code);
+	tmp_dword[0] = 0x0000;
+	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_PROTECTION_STATUS, handle, &tmp_dword[0],prop_code);
 
 	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_OBJECT_FILE_NAME, handle, entry->name,prop_code);
 	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_NAME, handle, entry->name,prop_code);
 	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_DISPLAY_NAME, handle, 0,prop_code);
 
 	// Date Created (NR) "YYYYMMDDThhmmss.s"
+	set_default_date(&lt);
 	t = entrystat.st_mtime;
 	localtime_r(&t, &lt);
 	snprintf(timestr,sizeof(timestr),"%.4d%.2d%.2dT%.2d%.2d%.2d",1900 + lt.tm_year, lt.tm_mon + 1, lt.tm_mday, lt.tm_hour, lt.tm_min, lt.tm_sec);
 	numberofelements += objectproplist_element(ctx, buffer, &ofs, maxsize, MTP_PROPERTY_DATE_CREATED, handle, &timestr,prop_code);
 
 	// Date Modified (NR) "YYYYMMDDThhmmss.s"
+	set_default_date(&lt);
 	t = entrystat.st_mtime;
 	localtime_r(&t, &lt);
 	snprintf(timestr,sizeof(timestr),"%.4d%.2d%.2dT%.2d%.2d%.2d",1900 + lt.tm_year, lt.tm_mon + 1, lt.tm_mday, lt.tm_hour, lt.tm_min, lt.tm_sec);
@@ -807,5 +815,9 @@ int build_objectproplist_dataset(mtp_ctx * ctx, void * buffer, int maxsize,fs_en
 
 	poke32(buffer, 0, maxsize, numberofelements);   // Number of elements
 
+	if( tmp_dword[1] != 0xDEADBEEF )
+	{
+		PRINT_ERROR("build_objectproplist_dataset : second dword modified ! Please report ! (0x%.8X)", tmp_dword[1] );
+	}
 	return ofs;
 }
