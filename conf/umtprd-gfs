@@ -1,13 +1,16 @@
 #!/bin/sh
-
-# GadgetFS uMTPrd startup example/test script
-
-# Raspberry Pi : start dwc2 & gadgetfs
-
+# GadgetFS uMTPrd startup script
 modprobe dwc2
 modprobe gadgetfs
+modprobe libcomposite
+
+# Mount configfs
+mkdir -p /sys/kernel/config
+mount -t configfs none /sys/kernel/config || true
+
+# Create basic gadget structure
+mkdir -p /sys/kernel/config/usb_gadget/g1
 
 # Mount gadgetfs
-
 mkdir /dev/gadget || true
 mount -t gadgetfs gadgetfs /dev/gadget || true
